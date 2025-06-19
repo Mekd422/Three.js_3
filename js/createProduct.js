@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 
-export function createProduct() {
-  const group = new THREE.Group(); // Group to hold all parts of the product
+// Implement basic 3D chair model creation
 
+export function createProduct() {
+  const group = new THREE.Group(); 
+  
   // Chair Seat
   const seatGeometry = new THREE.BoxGeometry(2, 0.3, 2);
   const material = new THREE.MeshStandardMaterial({ color: 0x8B4513, roughness: 0.5, metalness: 0.2 });
