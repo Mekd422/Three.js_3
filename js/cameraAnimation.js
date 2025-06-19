@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 
+// Set up OrbitControls for camera navigation
+
 let angle = 0;
 let autoRotateEnabled = true;
 
