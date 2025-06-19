@@ -3,15 +3,24 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 export function initScene() {
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+  scene.background = new THREE.Color(0x333333);
+
+
+  const camera = new THREE.PerspectiveCamera(
+    60, 
+    window.innerWidth / window.innerHeight, 
+    0.1, 
+    100
+  );
   camera.position.set(5, 5, 5);
-  
+
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
-  
+
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
+  controls.enableRotate = true; 
 
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -21,4 +30,3 @@ export function initScene() {
 
   return { scene, camera, renderer, controls };
 }
-

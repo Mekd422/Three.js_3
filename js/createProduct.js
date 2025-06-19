@@ -1,20 +1,40 @@
 import * as THREE from 'three';
 
 export function createProduct() {
-  const group = new THREE.Group();
+  const group = new THREE.Group(); // Group to hold all parts of the product
 
-  const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0x0088ff, metalness: 0.5, roughness: 0.3 });
-
-  const seat = new THREE.Mesh(new THREE.BoxGeometry(2, 0.3, 2), bodyMaterial);
-  seat.position.y = 1;
+  // Chair Seat
+  const seatGeometry = new THREE.BoxGeometry(2, 0.3, 2);
+  const material = new THREE.MeshStandardMaterial({ color: 0x8B4513, roughness: 0.5, metalness: 0.2 });
+  const seat = new THREE.Mesh(seatGeometry, material);
+  seat.position.set(0, 1, 0); // raise above origin
   group.add(seat);
 
-  for (let i = -1; i <= 1; i += 2) {
-    for (let j = -1; j <= 1; j += 2) {
-      const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1.5), bodyMaterial);
-      leg.position.set(i * 0.8, 0.25, j * 0.8);
-      group.add(leg);
-    }
-  }
+  // Chair Backrest
+  const backrestGeometry = new THREE.BoxGeometry(2, 2, 0.3);
+  const backrest = new THREE.Mesh(backrestGeometry, material);
+  backrest.position.set(0, 2, -0.85);
+  group.add(backrest);
+
+  // Chair Legs (4)
+  const legGeometry = new THREE.CylinderGeometry(0.1, 0.1, 1, 16);
+  const legMaterial = new THREE.MeshStandardMaterial({ color: 0x333333 });
+  
+  const positions = [
+    [-0.9, 0.5, -0.9],
+    [0.9, 0.5, -0.9],
+    [-0.9, 0.5, 0.9],
+    [0.9, 0.5, 0.9]
+  ];
+
+  positions.forEach(pos => {
+    const leg = new THREE.Mesh(legGeometry, legMaterial);
+    leg.position.set(...pos);
+    group.add(leg);
+  });
+
+  // Ensure everything is centered
+  group.position.set(0, 0, 0);
+
   return group;
 }
