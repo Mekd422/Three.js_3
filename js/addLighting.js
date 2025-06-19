@@ -1,13 +1,13 @@
 import * as THREE from 'three';
 
-
+// Add lighting setup with ambient and directional lights
 export function addLighting(scene) {
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); // white light, 40% strength
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); 
   scene.add(ambientLight);
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // white, brighter
-  directionalLight.position.set(5, 10, 5); // overhead at an angle
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); 
+  directionalLight.position.set(5, 10, 5); 
   directionalLight.castShadow = true;
 
 
